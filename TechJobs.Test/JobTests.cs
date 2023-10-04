@@ -1,10 +1,11 @@
 ﻿
+using Microsoft.VisualStudio.TestPlatform.Utilities;
+
 namespace TechJobs.Tests
 {
 	[TestClass]
 	public class JobTests
 	{
-        //Testing objects
         Job job1 = new Job();
 
         Job job2 = new Job();
@@ -18,7 +19,6 @@ namespace TechJobs.Tests
         {
             Assert.IsTrue(job1.Id != job2.Id);
             Assert.AreEqual(job2.Id, job1.Id + 1);
-            //TODO: Task 4: remove this method before you create your first test method 
         }
         [TestMethod]
         public void TestJobConstructorSetsAllFields()
@@ -34,6 +34,25 @@ namespace TechJobs.Tests
         {
             Assert.IsFalse(job3.Equals(job4));
         }
+        [TestMethod]
+        public void TestToStringStartsAndEndsWithNewLine()
+        {
+            string jobString = job3.ToString();
+            Assert.IsTrue(jobString.StartsWith("\n"));
+            Assert.IsTrue(jobString.EndsWith("\n"));
+        }
+        [TestMethod]
+        public void TestToStringContainsCorrectLabelsAndData()
+        {
+            Assert.AreEqual(job3.ToString(), $"\nID: {job3.Id}\nName: Product tester\nEmployer: ACME\nLocation: Desert\nPosition Type: Quality control\nCore Competency: Persistence\n");
+        }
+        [TestMethod]
+        public void TestToStringHandlesEmptyField()
+        {
+            //string emptyString = "";
+            //Assert.AreEqual(emptyString.ToString, "");
+        }
     }
 }
 
+//job3.ToString().Contains()
