@@ -4,12 +4,7 @@ namespace TechJobsOO.Tests
 	[TestClass]
 	public class TestTask3
 	{
-        //Testing the new Job class.  Tests are numbered.
-
-        /* TODO: Task 3: Remove this line to uncomment the tests
-          
-     
-        [TestMethod]    //1
+        [TestMethod]
         public void Test_JobClass_Has_No_Arg_Constructor()
         {
             Type jobType = typeof(Job);
@@ -31,13 +26,11 @@ namespace TechJobsOO.Tests
                     break;
                 }
             }
-
-            //verify
             Assert.AreEqual(existsCheck, nameCheck, "No Argument Constructor exists");
         }
 
 
-        [TestMethod] //2
+        [TestMethod]
         public void Test_No_Arg_Constructor_Sets_Unique_Id()
         {
             Job testJob1 = new Job();
@@ -47,10 +40,9 @@ namespace TechJobsOO.Tests
         }
 
 
-        [TestMethod]  //3
+        [TestMethod] 
         public void Test_JobClass_Has_Second_Constructror()
         {
-            //setup
             Type jobType = typeof(Job);
             ConstructorInfo[] constructorInfos = jobType.GetConstructors();
             List<string> conNames = new List<string>();
@@ -70,20 +62,16 @@ namespace TechJobsOO.Tests
                     break;
                 }
             }
-
-            //verify
             Assert.AreEqual(existsCheck, nameCheck, "Second Constructor Test");
         }
 
 
-        [TestMethod] //4
+        [TestMethod] 
         public void Test_JobClass_Has_Accessors()
         {
-            //setup
             Job testJob1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
             Job testJob2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
-            //verify 
             Assert.AreEqual(testJob1.Name, "Product tester", "Testing Job Name");
             Assert.AreEqual(testJob1.EmployerName.ToString(), "ACME", "Testing EmployerName Value");
             Assert.AreEqual(testJob1.EmployerLocation.ToString(), "Desert", "Testing EmployerLocation Value");
@@ -93,10 +81,9 @@ namespace TechJobsOO.Tests
         }
 
 
-        [TestMethod] //5
+        [TestMethod] 
         public void Test_Equals_Method_Setup()
         {
-            //setup
             Job testJob1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
             Job testJob2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
             MethodInfo mInfo = typeof(Job).GetMethod("Equals");
@@ -105,34 +92,27 @@ namespace TechJobsOO.Tests
             string mName = mInfo.ReflectedType.Name;
             string mGBD = mInfo.GetBaseDefinition().ReflectedType.Name;
 
-            //verify setup
             Assert.AreNotEqual(mName, mGBD, "Equals method doesn't belong to Job Class");
             Assert.AreEqual(lviCount, 2, "Equals method doesn't have correct number of local variables");
 
-            //verify output
             Assert.AreEqual(testJob1, testJob1, "Objects with same ID are equal");
             Assert.AreNotEqual(testJob1, testJob2, "Objects with different ID are not equal");
         }
 
 
-        [TestMethod]  //6
+        [TestMethod] 
         public void Test_GetHashCode_Setup()
         {
-            //setup
             Job testJob1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
             Job testJob2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
             MethodInfo mInfo = typeof(Job).GetMethod("GetHashCode");
             MethodBody mBody = mInfo.GetMethodBody();
             int localCount = mBody.LocalVariables.Count;
 
-            //verify setup
             Assert.IsTrue(localCount > 0, "GetHashCode not method setup");
 
-            //verify output
             Assert.AreNotEqual(testJob1.GetHashCode(), testJob2.GetHashCode(), "GetHashCode output test");
         }
-
-        TODO: Task 3: Remove this line to uncomment the tests */
     }
 }
 

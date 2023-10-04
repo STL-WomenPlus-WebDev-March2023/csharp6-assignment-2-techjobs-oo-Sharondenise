@@ -1,17 +1,59 @@
 ﻿
+using Microsoft.VisualStudio.TestPlatform.Utilities;
+
 namespace TechJobs.Tests
 {
 	[TestClass]
 	public class JobTests
 	{
-        //Testing Objects
-        //initalize your testing objects here
+        Job job1 = new Job();
+
+        Job job2 = new Job();
+
+        Job job3 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+
+        Job job4 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+
+        Job job5 = new Job("Product tester", new Employer(""), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
         [TestMethod]
-        public void TestMethod()
+        public void TestSettingJobId()
         {
-            //TODO: Task 4: remove this method before you create your first test method 
+            Assert.IsTrue(job1.Id != job2.Id);
+            Assert.AreEqual(job2.Id, job1.Id + 1);
+        }
+        [TestMethod]
+        public void TestJobConstructorSetsAllFields()
+        {
+            Assert.AreEqual(job3.Name, "Product tester");
+            Assert.AreEqual(job3.EmployerName.Value, "ACME");
+            Assert.AreEqual(job3.EmployerLocation.Value, "Desert");
+            Assert.AreEqual(job3.JobType.Value, "Quality control");
+            Assert.AreEqual(job3.JobCoreCompetency.Value, "Persistence");
+        }
+        [TestMethod]
+        public void TestJobsForEquality()
+        {
+            Assert.IsFalse(job3.Equals(job4));
+        }
+        [TestMethod]
+        public void TestToStringStartsAndEndsWithNewLine()
+        {
+            string jobString = job3.ToString();
+            Assert.IsTrue(jobString.StartsWith("\n"));
+            Assert.IsTrue(jobString.EndsWith("\n"));
+        }
+        [TestMethod]
+        public void TestToStringContainsCorrectLabelsAndData()
+        {
+            Assert.AreEqual(job3.ToString(), $"\nID: {job3.Id}\nName: Product tester\nEmployer: ACME\nLocation: Desert\nPosition Type: Quality control\nCore Competency: Persistence\n");
+        }
+        [TestMethod]
+        public void TestToStringHandlesEmptyField()
+        {
+            Assert.AreEqual(job5.ToString(), $"\nID: {job5.Id}\nName: Product tester\nEmployer: Data not available\nLocation: Desert\nPosition Type: Quality control\nCore Competency: Persistence\n");
         }
     }
 }
 
+//job3.ToString().Contains()
